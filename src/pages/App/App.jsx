@@ -6,7 +6,7 @@ export default function App() {
 
   async function getJSON(url) {
     try {
-      const proxyUrl = 'https://cors-anywhere.ardittristan.workers.dev/corsproxy/?apiurl=' + url;
+      const proxyUrl = 'https://cors-anywhere-fvtt-856084886d60.herokuapp.com/' + url;
 
       const response = await fetch(proxyUrl);
 
