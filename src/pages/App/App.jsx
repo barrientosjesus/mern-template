@@ -3,23 +3,35 @@ import ActorCard from '../../components/ActorCard/ActorCard';
 
 export default function App() {
   const [actorData, setActorData] = useState({});
-  const [actors, setActors] = useState({});
+
+  async function getJSON(url) {
+    try {
+      const proxyUrl = 'https://cors-anywhere.ardittristan.workers.dev/corsproxy/?apiurl=' + url;
+
+      const response = await fetch(proxyUrl);
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async function fetchDataAndUpdate() {
-    await fetch('https://actor-widget-cae0d5c7d2fc.herokuapp.com/actors/http://192.168.1.160:30000/actorAPI/test-actors.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setActorData(data['dbWUbHD7vlnJg7yi']);
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      });
+    try {
+      const response = await getJSON('https://localhost:30000/actorAPI/test-actors.json');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setActorData(data['dbWUbHD7vlnJg7yi']);
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
   }
 
   useEffect(() => {
@@ -35,8 +47,8 @@ export default function App() {
 
   return (
     <main className="w-full flex flex-col items-center justify-center">
-        {actorData.name && (<ActorCard actor={actorData} />)}
-        
+      {actorData.name && (<ActorCard actor={actorData} />)}
+
     </main>
   );
 }

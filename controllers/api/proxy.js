@@ -11,6 +11,7 @@ let proxy = corsAnywhere.createServer({
 });
 
 function proxyURL(req, res) {
+    console.log('proxy!')
     req.url = req.url.replace('/actors/', '/'); // Strip '/actors' from the front of the URL.
     // Emit the request to the proxy
     proxy.emit('request', req, res);

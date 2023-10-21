@@ -1,10 +1,8 @@
-import { useState } from "react";
 import ProgressBarUnit from "./ProgressBarUnit";
 import "./SpellSlotItem.css";
 
 export default function SpellSlotItem({ slotName, spell }) {
     const {value, max} = spell;
-    const [progress, setProgress] = useState(value)
     const slotNum = getSpellSlotNum(slotName);
 
     return (

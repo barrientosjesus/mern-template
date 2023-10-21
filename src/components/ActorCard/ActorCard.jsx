@@ -59,7 +59,7 @@ export default function ActorCard({ actor }) {
                         <span className="z-10 absolute font-bold text-white text-sm md:text-md lg:text-2xl">+1</span>
                     </div>
                 </div>
-                <div id="actor-spellslots" className="grid grid-rows-1 items-center justify-items-center" style={{gridTemplateColumns:`repeat(${actor.spellSlots.length}, 1fr)`}}>
+                <div id="actor-spellslots" className="grid grid-rows-1 items-center" style={{gridTemplateColumns:`repeat(${actor.spellSlots.length}, 1fr)`}}>
                     {actor.spellSlots.map((spell, index) => (
                         <SpellSlotItem slotName={spell.name} spellSlotsPerc={getPercent(spell.value, spell.max)} spell={spell} key={index} />
                     ))}
